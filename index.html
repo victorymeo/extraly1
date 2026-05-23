@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENU EXTRALY PREMIUM</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --card-bg: #141414;
+            --neon-cyan: #00ffff;
+            --neon-blue: #0088ff;
+            --text-gray: #777777;
+            --border-color: #1f1f1f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .menu-container {
+            background-color: #111111;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 14px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            border: 1px solid #1c1c1c;
+        }
+
+        #login-box {
+            text-align: center;
+            padding: 15px 0;
+        }
+
+            #login-box h1 {
+                font-size: 18px;
+                color: var(--neon-cyan);
+                margin-bottom: 20px;
+                letter-spacing: 1px;
+                text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+            }
+
+        .login-input {
+            width: 100%;
+            background: #181818;
+            border: 1px solid #333;
+            padding: 12px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-align: center;
+            outline: none;
+            transition: 0.2s;
+        }
+
+            .login-input:focus {
+                border-color: var(--neon-cyan);
+                box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+            }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+            .close-btn:hover {
+                color: #ff4444;
+            }
+
+        .header-section {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.01);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .logo-box {
+            flex: 1.2;
+            height: 75px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-text-clear {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 27px;
+            font-weight: 900;
+            color: #00ffff;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: 3.5px;
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+            margin-top: 4px;
+            -webkit-text-stroke: 1px #050505;
+            filter: drop-shadow(0 0 2px #00ffff) drop-shadow(0 0 6px rgba(0, 176, 255, 0.6));
+            transform: skewX(-10deg);
+        }
+
+        .ump-weapon {
+            position: absolute;
+            top: -4px;
+            right: -2px;
+            width: 60px;
+            height: auto;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+            opacity: 0.85;
+            z-index: 1;
+        }
+
+        .shotgun-weapon {
+            position: absolute;
+            bottom: -4px;
+            left: -2px;
+            width: 56px;
+            height: auto;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+            opacity: 0.85;
+            z-index: 1;
+        }
+
+        .user-info-box {
+            flex: 1;
+            font-size: 11px;
+            border-left: 1px solid #222;
+            padding-left: 12px;
+        }
+
+        .welcome-text {
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .info-label {
+            color: var(--text-gray);
+            font-size: 9px;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 115px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .feature-desc {
+            font-size: 9.5px;
+            color: #888888;
+            text-align: center;
+            text-transform: uppercase;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        .action-btn {
+            width: 100%;
+            background: linear-gradient(180deg, #0091ea, #0077c2);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 5px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 3px 10px rgba(0, 145, 234, 0.2);
+        }
+
+            .action-btn:active {
+                transform: scale(0.97);
+                background: #0066a6;
+            }
+
+        .console-box {
+            background: #070707;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 12px;
+            height: 170px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 11px;
+            color: #39ff14;
+            margin-bottom: 15px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .console-line {
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin-bottom: 3px;
+        }
+
+        .footer-status {
+            font-size: 12px;
+            color: var(--neon-cyan);
+            font-weight: bold;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .activation-modal {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.96);
+            border-radius: 14px;
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .modal-icon-gamepad {
+            width: 55px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.15));
+            opacity: 0.85;
+        }
+
+        .modal-title-game {
+            font-size: 19px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .modal-text-game {
+            font-size: 12.5px;
+            color: #bbbbbb;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            padding: 0 5px;
+            text-align: center;
+        }
+
+        .game-select-btn-flat {
+            width: 100%;
+            padding: 16px 10px;
+            font-size: 14px;
+            font-weight: 800;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            color: #ffffff;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-orange-tone {
+            background: linear-gradient(180deg, #ff5500, #e63c00);
+            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.35);
+        }
+
+            .btn-orange-tone:active {
+                transform: scale(0.98);
+                background: #cc3600;
+            }
+
+        .btn-blue-tone {
+            background: linear-gradient(180deg, #0066ff, #0044cc);
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.35);
+        }
+
+            .btn-blue-tone:active {
+                transform: scale(0.98);
+                background: #003399;
+            }
+
+        .btn-dark-close {
+            background: linear-gradient(180deg, #252525, #1a1a1a);
+            color: #ffffff;
+            border: 1px solid #2d2d2d;
+            width: 100%;
+            padding: 13px 10px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+            .btn-dark-close:hover {
+                background: #2d2d2d;
+                border-color: #444;
+            }
+
+        .device-box {
+            background: #161616;
+            border: 1px dashed var(--neon-cyan);
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--neon-cyan);
+            font-weight: bold;
+            width: 100%;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-container">
+        <div class="close-btn" onclick="closeMenu()">✕</div>
+
+        <!-- MÀN HÌNH ĐĂNG NHẬP -->
+        <div id="login-box">
+            <h1>HỆ THỐNG XÁC THỰC</h1>
+            <input type="password" id="passInput" class="login-input" placeholder="Nhập Key kích hoạt hệ thống...">
+            <button class="action-btn" id="loginBtn" onclick="handleLogin()" style="padding: 12px; background: linear-gradient(180deg, #00ffff, #0088ff); color: #000;">KÍCH HOẠT NGAY</button>
+            <p id="error" style="color: #ff4444; font-size: 12px; text-align: center; display: none; margin-top: 15px; font-weight: 600;"></p>
+
+            <div style="background: rgba(255,255,255,0.02); border: 1px dashed #222; padding: 12px; border-radius: 8px; text-align: center; margin-top: 25px;">
+                <div style="font-size: 10px; color: #555; margin-bottom: 5px; letter-spacing: 0.5px;">MÃ MÁY (DEVICE ID):</div>
+                <div id="displayDeviceIDLogin" style="color: var(--neon-cyan); font-weight: bold; font-family: monospace; font-size: 13px;">DEV-LOADING...</div>
+                <button onclick="copyMyDeviceID()" style="background: rgba(0,255,255,0.05); border: 1px solid rgba(0,255,255,0.2); color: #00ffff; font-size: 10px; padding: 4px 10px; border-radius: 4px; margin-top: 8px; cursor: pointer; font-weight: bold;">SAO CHÉP MÃ</button>
+            </div>
+        </div>
+
+        <!-- MÀN HÌNH ĐIỀU KHIỂN CHÍNH -->
+        <div id="main-app" style="display: none;">
+
+            <!-- 🔒 MODAL BẢN QUYỀN TRUY CẬP -->
+            <div class="activation-modal" id="activationModal">
+                <div style="font-size: 35px; color: #ff3333; margin-bottom: 10px;">🔒</div>
+                <div class="modal-title-game" style="color: #ff3333;" id="modalFeatureName">TRUY CẬP BỊ TỪ CHỐI</div>
+                <div class="modal-text-game" id="modalFeatureDesc">Gói của bạn không hỗ trợ tính năng này.</div>
+                <div class="device-box" id="modalDeviceID" onclick="copyModalDeviceID()">DEV-XXXXXX</div>
+                <button class="action-btn" onclick="redirectToAdmin()" style="background: #00e676; color: #000; margin-bottom: 10px; padding: 12px;">GỬI MÃ ĐẾN ZALO ADMIN</button>
+                <button class="btn-dark-close" onclick="closeModal()">QUAY LẠI</button>
+            </div>
+
+            <!-- 🎮 CỬA SỔ LIÊN QUAN GAME CHUẨN KHUÔN "image_da8bee.png" -->
+            <div class="activation-modal" id="gameSelectModal">
+                <svg class="modal-icon-gamepad" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21,6H3A3,3 0 0,0 0,9V15A3,3 0 0,0 3,18H21A3,3 0 0,0 24,15V9A3,3 0 0,0 21,6M6,13H5V14A1,1 0 0,1 4,15A1,1 0 0,1 3,14V13H2A1,1 0 0,1 1,12A1,1 0 0,1 2,11H3V10A1,1 0 0,1 4,9A1,1 0 0,1 5,10V11H6A1,1 0 0,1 7,12A1,1 0 0,1 6,13M15.5,14A1.5,1.5 0 1,1 17,12.5A1.5,1.5 0 0,1 15.5,14M18.5,11A1.5,1.5 0 1,1 20,9.5A1.5,1.5 0 0,1 18.5,11Z" opacity="0.45" />
+                </svg>
+
+                <div class="modal-title-game" id="gameSelectTitle">ĐÃ KÍCH HOẠT XONG EXTRALY PREMIUM</div>
+
+                <div class="modal-text-game">
+                    Dữ liệu đã nạp hoàn tất. Vui lòng chọn phiên bản game bạn muốn chơi để hệ thống tự động mở:
+                </div>
+
+                <button class="game-select-btn-flat btn-orange-tone" onclick="launchGame('com.dts.freefireth')">
+                    FREE FIRE THƯỜNG
+                </button>
+                <button class="game-select-btn-flat btn-blue-tone" onclick="launchGame('com.dts.freefiremax')">
+                    FREE FIRE MAX
+                </button>
+
+                <button class="btn-dark-close" onclick="closeGameModal()">ĐÓNG</button>
+            </div>
+
+            <!-- KHU VỰC ĐẦU TRANG -->
+            <div class="header-section">
+                <div class="logo-box">
+                    <svg class="ump-weapon" viewBox="0 0 120 50">
+                        <path d="M10,25 L30,25 L35,21 L55,21 L60,16 L75,16 L78,21 L95,21 L102,17 L112,17 L115,22 L105,27 L95,27 L92,34 L82,34 L82,27 L50,27 L48,34 L40,34 L38,27 L22,27 L22,36 L16,36 L16,27 L10,27 Z" fill="#ffffff" />
+                        <path d="M84,28 L90,39 L105,39 L101,28 Z" fill="none" stroke="#ffffff" stroke-width="1.5" />
+                    </svg>
+                    <svg class="shotgun-weapon" viewBox="0 0 120 40">
+                        <path d="M15,22 L45,22 L52,17 L95,17 L102,13 L118,13 L118,18 L105,21 L70,21 L62,26 L30,26 L15,30 Z" fill="#ffffff" />
+                        <circle cx="28" cy="24" r="1" fill="#000" />
+                    </svg>
+                    <div class="logo-text-clear">EXTRALY</div>
+                </div>
+
+                <div class="user-info-box">
+                    <div class="welcome-text">Support For FFTH And FFMAX</div>
+                    <div class="info-label">Tài Khoản (ID Máy)</div>
+                    <div id="userDeviceID" class="info-value" style="color: var(--neon-cyan); font-family: monospace; font-size: 12px;">DEV-XXXXXX</div>
+                    <div class="info-label">Thời Hạn</div>
+                    <div class="info-value" style="color: #cccccc; font-size: 12px;">1 OB</div>
+                </div>
+            </div>
+
+            <!-- DANH SÁCH CHỨC NĂNG -->
+            <div class="grid-container">
+                <div class="feature-card">
+                    <div class="feature-desc">BẢN TIÊU CHUẨN STANDARD</div>
+                    <button class="action-btn" onclick="triggerFeature('V1 FREE')">V1 FREE</button>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-desc">THE BEST FIT FOR 4VS4 NEW VERSION</div>
+                    <button class="action-btn" onclick="triggerFeature('V2')">V2</button>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-desc">THE BEST FIT FOR 6VS6 PRO</div>
+                    <button class="action-btn" onclick="triggerFeature('V3')">V3</button>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-desc">INCLUDES ALL THE BEST SENSITIVITY PREMIUM</div>
+                    <button class="action-btn" onclick="triggerFeature('Extraly Premium')" style="background: linear-gradient(180deg, #00ffff, #00a6ff); color: #000;">PREMIUM</button>
+                </div>
+            </div>
+
+            <!-- CONSOLE LOG TRỰC QUAN -->
+            <div class="console-box" id="consoleLog">
+                <div class="console-line" style="color: #444;">[SYSTEM]: Chờ lệnh nạp dữ liệu từ người dùng...</div>
+            </div>
+
+            <div class="footer-status" id="statusText">>> Trạng thái: Sẵn sàng</div>
+        </div>
+    </div>
+
+    <script>
+        const ZALO_LINK = "https://zalo.me/0399622707";
+        const SERVER_KEY_URL = "https://gist.githubusercontent.com/victorymeo/0923899eab643cbaa2c25a96b860701c/raw/key.txt";
+
+        let myDeviceID = localStorage.getItem('my_device_id');
+        if (!myDeviceID) {
+        myDeviceID = 'DEV-' + Math.random().toString(36).substring(2, 11).toUpperCase();
+        localStorage.setItem('my_device_id', myDeviceID);
+        }
+
+        document.getElementById('displayDeviceIDLogin').innerText = myDeviceID;
+        document.getElementById('userDeviceID').innerText = myDeviceID;
+        document.getElementById('modalDeviceID').innerText = myDeviceID;
+
+        let userLicenseStatus = "free";
+
+        function copyMyDeviceID() {
+        navigator.clipboard.writeText(myDeviceID);
+        alert("Đã sao chép mã máy thành công!");
+        }
+
+        function copyModalDeviceID() {
+        navigator.clipboard.writeText(myDeviceID);
+        alert("Đã sao chép nhanh ID máy!");
+        }
+
+        async function handleLogin() {
+        const inputPass = document.getElementById('passInput').value.trim();
+        const errorText = document.getElementById('error');
+        const loginBtn = document.getElementById('loginBtn');
+
+        if (!inputPass) {
+        errorText.innerText = "Vui lòng không để trống khóa truy cập!";
+        errorText.style.display = 'block';
+        return;
+        }
+
+        loginBtn.innerText = "ĐANG XÁC THỰC MÁY...";
+        loginBtn.disabled = true;
+        errorText.style.display = 'none';
+
+        try {
+        const response = await fetch(SERVER_KEY_URL + "?nocache=" + Math.random());
+        if (!response.ok) throw new Error();
+        const rawData = await response.text();
+
+        const lines = rawData.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+        let keyFound = false;
+        let isAccessGranted = false;
+
+        for (let line of lines) {
+        const parts = line.split(':');
+        if (parts.length < 2) continue;
+
+        const serverKey = parts[0].trim();
+        const status = parts[1].trim();
+
+        if (inputPass === serverKey) {
+        keyFound = true;
+        if (status === 'free' || status.toUpperCase().includes(myDeviceID.toUpperCase())) {
+        isAccessGranted = true;
+        userLicenseStatus = status.toLowerCase();
+        localStorage.setItem('bound_key', serverKey);
+        } else if (localStorage.getItem('bound_key') === serverKey) {
+        isAccessGranted = true;
+        userLicenseStatus = status.toLowerCase();
+        }
+        break;
+        }
+        }
+
+        if (!keyFound) {
+        errorText.innerText = "Mật mã bảo mật không chính xác!";
+        errorText.style.display = 'block';
+        } else if (isAccessGranted) {
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('main-app').style.display = 'block';
+        } else {
+        errorText.innerText = "Khóa truy cập đã bị liên kết sang thiết bị khác!";
+        errorText.style.display = 'block';
+        }
+        } catch (err) {
+        errorText.innerText = "Máy chủ bận hoặc không thể kết nối mạng!";
+        errorText.style.display = 'block';
+        } finally {
+        loginBtn.innerText = "KÍCH HOẠT NGAY";
+        loginBtn.disabled = false;
+        }
+        }
+
+        function triggerFeature(name) {
+        if (name === 'V1 FREE') {
+        runInjectLogic(name);
+        return;
+        }
+
+        let hasPermission = false;
+        const statusClean = userLicenseStatus.trim();
+
+        if (name === 'V2' && statusClean.includes('_v2')) hasPermission = true;
+        else if (name === 'V3' && statusClean.includes('_v3')) hasPermission = true;
+        else if (name === 'Extraly Premium' && statusClean.includes('_premium')) hasPermission = true;
+
+        if (hasPermission) {
+        runInjectLogic(name);
+        } else {
+        document.getElementById('modalFeatureName').innerText = `YÊU CẦU GÓI CẤP CAO`;
+        document.getElementById('modalFeatureDesc').innerText = `ID máy của bạn chưa được phê duyệt quyền sử dụng cho dữ liệu nâng cao [${name.toUpperCase()}]. Hãy gửi lại ID cho quản trị viên.`;
+        document.getElementById('activationModal').style.display = 'flex';
+        }
+        }
+
+        function runInjectLogic(name) {
+        const consoleBox = document.getElementById('consoleLog');
+        const statusElement = document.getElementById('statusText');
+
+        statusElement.innerText = ">> Trạng thái: Đang phân tích core...";
+        statusElement.style.color = "#ffcc00";
+        consoleBox.innerHTML = "";
+
+        let logs = [];
+
+        if (name === 'V1 FREE') {
+        logs = [
+        `[~] Open target process connection: Free Fire...`,
+        `[ANTIBAN]: Initializing safe stealth guard layer...`,
+        `[ANTICHEAT]: Hooking local security scanner modules...`,
+        `[~] Loading Regedit_DPI_SensFix patcher matrix...`,
+        `[+] Tweaking Crosshair tracking center layout: [OK]`,
+        `[+] Adjusting standard Headshot calibration offsets...`,
+        `[SUCCESS]: V1 FREE Active! Tăng nhẹ tỷ lệ Headshot.`
+        ];
+        }
+        else if (name === 'V2' || name === 'V3') {
+        logs = [
+        `[~] Hooking framework game partition: Free Fire MAX...`,
+        `[ANTIBAN]: Deep-cleaning internal execution trace logs...`,
+        `[ANTIBAN]: Secure Protection Engine Status: [SECURED]`,
+        `[ANTICHEAT]: Initiating Garena Security Bypass algorithm...`,
+        `[ANTICHEAT]: Bypass active client check integrity: 100%`,
+        `[~] Loading AimAssist_Tracking module into memory space...`,
+        `[+] Fine-Tuning Recoil: Bullet spread reduced completely`,
+        `[+] Applying Auto-Aimlock dynamic vector to Neck/Head Bone`,
+        `[+] Simulating Touch Event Speed: +35% (Kéo tâm cực bén)`,
+        `[+] Calibrating Anti-Shake Crosshair stabilize script...`,
+        `[SUCCESS]: ${name} Pro Active! Khóa tâm mượt mà, NO RECOIL.`
+        ];
+        }
+        else if (name === 'Extraly Premium') {
+        logs = [
+        `[~] Connecting to Extraly VIP Cloud Secure Pipeline...`,
+        `[ANTIBAN]: Activating Ultra Invisible Anti-Ban Shield v9.9...`,
+        `[ANTIBAN]: Account log protection & report blocking: [ENABLED]`,
+        `[ANTICHEAT]: Suppressing client-side anomaly logs submission...`,
+        `[+++] BYPASS STATUS: CRITICAL SUCCESS (Chống quét ẩn 2026)`,
+        `[~] Injecting FULL_RED_HEADSHOT master code algorithm...`,
+        `[+] Weapon Profile Loaded: Shotgun One-Tap Auto Align`,
+        `[+] Weapon Profile Loaded: UMP Laser Beam (No Recoil / Không giật)`,
+        `[+] Modifying Hitbox Scale: Aimlock dynamic target expanded`,
+        `[+++] SENSITIVITY OVERRIDE: FULL ĐỎ 100% SUCCESSFUL`,
+        `[SUCCESS]: PREMIUM INJECTED! Vào game và trải nghiệm.`
+        ];
+        }
+
+        logs.forEach((lineText, index) => {
+        setTimeout(() => {
+        const p = document.createElement('div');
+        p.className = "console-line";
+        p.innerText = lineText;
+
+        if (index === logs.length - 1) {
+        p.style.color = "var(--neon-cyan)";
+        p.style.fontWeight = "bold";
+        } else if (lineText.includes('[ANTIBAN]')) {
+        p.style.color = "#ffeb3b";
+        } else if (lineText.includes('[ANTICHEAT]')) {
+        p.style.color = "#e91e63";
+        } else if (lineText.includes('[+]') || lineText.includes('[+++]')) {
+        p.style.color = "#a6ff00";
+        } else if (lineText.includes('FULL ĐỎ') || lineText.includes('NO RECOIL')) {
+        p.style.color = "#ff3d00";
+        }
+
+        consoleBox.appendChild(p);
+        consoleBox.scrollTop = consoleBox.scrollHeight;
+
+        if (index === logs.length - 1) {
+        statusElement.innerText = ">> Trạng thái: Đã hoàn tất cài đặt !";
+        statusElement.style.color = "var(--neon-cyan)";
+
+        setTimeout(() => {
+        document.getElementById('gameSelectTitle').innerText = `ĐÃ KÍCH HOẠT XONG ${name.toUpperCase()}`;
+        document.getElementById('gameSelectModal').style.display = 'flex';
+        }, 500);
+        }
+        }, index * 250);
+        });
+        }
+
+        function launchGame(packageName) {
+        alert(`🚀 Giả lập khởi chạy thành công gói: ${packageName}`);
+        closeGameModal();
+        }
+
+        function closeModal() { document.getElementById('activationModal').style.display = 'none'; }
+        function closeGameModal() { document.getElementById('gameSelectModal').style.display = 'none'; }
+        function redirectToAdmin() { window.open(ZALO_LINK, '_blank'); }
+        function closeMenu() { if (confirm("Xác nhận đóng giao diện menu?")) window.close(); }
+    </script>
+</body>
+</html>
