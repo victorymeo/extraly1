@@ -370,6 +370,95 @@
             margin-bottom: 15px;
             cursor: pointer;
         }
+
+        /* TÂM ẢO OVERLAY */
+        #crosshairOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            justify-content: center;
+            align-items: center;
+        }
+        #crosshairOverlay.active { display: flex; }
+        .ch-wrap {
+            position: relative;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ch-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1.5px solid rgba(0,255,255,0.6);
+            animation: chPulse 1.5s ease-in-out infinite;
+        }
+        .ch-ring:nth-child(1) { width: 80px; height: 80px; animation-delay: 0s; }
+        .ch-ring:nth-child(2) { width: 55px; height: 55px; border-color: rgba(255,50,50,0.7); animation-delay: .3s; }
+        .ch-ring:nth-child(3) { width: 30px; height: 30px; animation-delay: .6s; }
+        @keyframes chPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.08)} }
+        .ch-line-h, .ch-line-v {
+            position: absolute;
+            background: rgba(0,255,255,0.8);
+        }
+        .ch-line-h { width: 50px; height: 1px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+        .ch-line-v { width: 1px; height: 50px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+        .ch-dot { width: 5px; height: 5px; border-radius: 50%; background: #ff2244; box-shadow: 0 0 8px #ff2244; }
+        .ch-close-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: all;
+            background: rgba(10,10,10,0.9);
+            border: 1px solid rgba(0,255,255,0.3);
+            color: #00ffff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 8px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            font-family: monospace;
+        }
+
+        /* ẢNH NHÂN VẬT TRONG CONSOLE */
+        .char-in-console {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 6px 0;
+        }
+        .char-in-console img {
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0,255,255,0.4));
+            animation: charFloat 2s ease-in-out infinite;
+        }
+        @keyframes charFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+        /* NÚT TÂM ẢO */
+        .tamao-btn {
+            width: 100%;
+            background: linear-gradient(180deg, #1a0033, #0d001f);
+            color: #cc44ff;
+            border: 1px solid rgba(200,50,255,0.4);
+            border-radius: 6px;
+            padding: 9px 5px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 0 10px rgba(200,50,255,0.15);
+        }
+        .tamao-btn:active { transform: scale(0.97); }
+        .tamao-btn.on {
+            background: linear-gradient(180deg, #cc44ff, #8800cc);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(200,50,255,0.5);
+        }
+
     </style>
 </head>
 <body>
@@ -453,7 +542,7 @@
             <div class="grid-container">
                 <div class="feature-card">
                     <div class="feature-desc">BẢN TIÊU CHUẨN STANDARD</div>
-                    <button class="action-btn" onclick="triggerFeature('V1 FREE')">V1 FREE</button>
+                    <button class="action-btn" onclick="triggerFeature('V1')">V1 </button>
                 </div>
                 <div class="feature-card">
                     <div class="feature-desc">THE BEST FIT FOR 4VS4 NEW VERSION</div>
@@ -467,6 +556,10 @@
                     <div class="feature-desc">INCLUDES ALL THE BEST SENSITIVITY PREMIUM</div>
                     <button class="action-btn" onclick="triggerFeature('Extraly Premium')" style="background: linear-gradient(180deg, #00ffff, #00a6ff); color: #000;">PREMIUM</button>
                 </div>
+                <div class="feature-card" style="grid-column: span 2;">
+                    <div class="feature-desc">🎯 TÂM ẢO — HIỆN CROSSHAIR </div>
+                    <button class="tamao-btn" id="tamaoBtn" onclick="toggleCrosshair()">⊕ BẬT TÂM ẢO</button>
+                </div>
             </div>
 
             <!-- CONSOLE LOG TRỰC QUAN -->
@@ -478,7 +571,40 @@
         </div>
     </div>
 
+
+    <!-- TÂM ẢO OVERLAY -->
+    <div id="crosshairOverlay">
+        <div class="ch-wrap">
+            <div class="ch-ring"></div>
+            <div class="ch-ring"></div>
+            <div class="ch-ring"></div>
+            <div class="ch-line-h"></div>
+            <div class="ch-line-v"></div>
+            <div class="ch-dot"></div>
+        </div>
+        <button class="ch-close-btn" onclick="toggleCrosshair()">✕ TẮT TÂM ẢO</button>
+    </div>
+
     <script>
+
+        const CHAR_B64 = 'data:image/jpeg;base64,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';
+        let crosshairOn = false;
+
+        function toggleCrosshair() {
+            crosshairOn = !crosshairOn;
+            const overlay = document.getElementById('crosshairOverlay');
+            const btn = document.getElementById('tamaoBtn');
+            if (crosshairOn) {
+                overlay.classList.add('active');
+                btn.classList.add('on');
+                btn.textContent = '✕ TẮT TÂM ẢO';
+            } else {
+                overlay.classList.remove('active');
+                btn.classList.remove('on');
+                btn.textContent = '⊕ BẬT TÂM ẢO';
+            }
+        }
+
         const ZALO_LINK = "https://zalo.me/0399622707";
         const SERVER_KEY_URL = "https://gist.githubusercontent.com/victorymeo/0923899eab643cbaa2c25a96b860701c/raw/key.txt";
 
@@ -569,7 +695,7 @@
         }
 
         function triggerFeature(name) {
-        if (name === 'V1 FREE') {
+        if (name === 'V1') {
         runInjectLogic(name);
         return;
         }
@@ -584,7 +710,7 @@
         if (hasPermission) {
         runInjectLogic(name);
         } else {
-        document.getElementById('modalFeatureName').innerText = `YÊU CẦU GÓI CẤP CAO`;
+        document.getElementById('modalFeatureName').innerText = `YÊU CẦU GÓI MUA CẤP CAO`;
         document.getElementById('modalFeatureDesc').innerText = `ID máy của bạn chưa được phê duyệt quyền sử dụng cho dữ liệu nâng cao [${name.toUpperCase()}]. Hãy gửi lại ID cho quản trị viên.`;
         document.getElementById('activationModal').style.display = 'flex';
         }
@@ -597,10 +723,18 @@
         statusElement.innerText = ">> Trạng thái: Đang phân tích core...";
         statusElement.style.color = "#ffcc00";
         consoleBox.innerHTML = "";
+        // Hiện ảnh nhân vật
+        const charDiv = document.createElement('div');
+        charDiv.className = 'char-in-console';
+        const charImg = document.createElement('img');
+        charImg.src = CHAR_B64;
+        charImg.alt = 'char';
+        charDiv.appendChild(charImg);
+        consoleBox.appendChild(charDiv);
 
         let logs = [];
 
-        if (name === 'V1 FREE') {
+        if (name === 'V1') {
         logs = [
         `[~] Open target process connection: Free Fire...`,
         `[ANTIBAN]: Initializing safe stealth guard layer...`,
@@ -608,7 +742,7 @@
         `[~] Loading Regedit_DPI_SensFix patcher matrix...`,
         `[+] Tweaking Crosshair tracking center layout: [OK]`,
         `[+] Adjusting standard Headshot calibration offsets...`,
-        `[SUCCESS]: V1 FREE Active! Tăng nhẹ tỷ lệ Headshot.`
+        `[SUCCESS]: V1 Active! Tăng nhẹ tỷ lệ Headshot.`
         ];
         }
         else if (name === 'V2' || name === 'V3') {
